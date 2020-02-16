@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Single Page Application</title>
+      <link rel="shortcut icon" href="#" />
+      <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="assets/customcss/style.css" />
+      <link rel="stylesheet" type="text/css" href="assets/customcss/authform.css" />
+      <link rel="stylesheet" type="text/css" href="assets/css/animate.css" />
+   </head>
+   <body>
+      <!-- Wrapper Starts -->
+      <div class="wrapper">
+
+         <!-- Container Starts -->
+         <div class="container">
+          <!-- User Info Starts -->
+            <div id="user_info" class="col-5 float-right">
+               Hello <span id="display"></span> ! How are you today..?
+               <a href="javascript:void(0)" id="log_out" class="btn btn-small btn-danger float-right">Logout</a>
+            </div>
+            <div class="clearfix"></div>
+          <!-- User Info Ends -->
+         </div>
+          <!-- Container Ends -->
+
+
+         <!-- Auth Page Starts -->
+         <div id="auth-page" class="m-top-50">
+
+            <!-- Container Starts -->
+            <div class="container">
+
+              <!-- Login Form Starts -->
+               <form id="login_form" method="POST" action="http://localhost/api-code/api/users/CheckUsersCredentials"
+                  class="form-signin">
+                  <div class="text-center mb-4">
+                     <h1 class="h3 mb-3 font-weight-normal">Article Managment App</h1>
+                     <p>Login To manage your Articles here.. or <a href="javascript:void(0);" id="register">Register</a></p>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="email" id="loginEmail" class="form-control" placeholder="Email address" required autofocus>
+                     <label for="loginEmail">Email address</label>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                     <label for="loginPassword">Password</label>
+                  </div>
+                  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                  <p class="mt-5 mb-3 text-muted text-center">&copy; Article Managment App</p>
+               </form>
+                <!-- Login Form Ends -->
+
+
+                <!-- Register Form Starts -->
+               <form id="register_form" method="POST" action="http://localhost/api-code/api/users/CreateUsers" class="form-register">
+                  <div class="text-center mb-4">
+                     <h1 class="h3 mb-3 font-weight-normal">Article App</h1>
+                     <p>Register here if already a member <a href="javascript:void(0);" id="login">Login</a></p>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="text" id="firstname" class="form-control" name="firstname" placeholder="Firstname"  autofocus>
+                     <label for="firstname">First Name</label>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="text" id="lastname" class="form-control" name="lastname" placeholder="Lastname"  autofocus>
+                     <label for="lastname">Last Name</label>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="email" id="registerEmail" class="form-control" placeholder="Email address"  autofocus>
+                     <label for="registerEmail">Email address</label>
+                  </div>
+                  <div class="form-label-group">
+                     <input type="password" id="registerPassword" class="form-control" placeholder="Password" required>
+                     <label for="registerPassword">Password</label>
+                  </div>
+                  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Register" />
+                  <p class="mt-5 mb-3 text-muted text-center">&copy; Article Managment App</p>
+               </form>
+               <!-- Register Form Ends -->
+
+            </div>
+             <!-- Container Ends -->
+         </div>
+         <!-- Auth Page Ends -->
+
+         <!-- App Page Starts -->
+         <div id="app-page">
+
+            <!-- Container Starts -->
+            <div class="container m-top-50">
+               <div class="row">
+                  <div class="col-9">
+                     <div id="all_articles block-card">
+                        <div class="row article_header">
+                           <div class="col-6">
+                              <a href="javascript:void(0)" id="create_article_btn" class="btn btn-small btn-success">Create Article</a>
+                           </div>
+                        </div>
+
+                        <!-- Create Article Panel Starts -->
+                        <div id="create_panel" class="block-card m-bot-40">
+                          <h3>Create An Article</h3>
+                           <form id="create_article" method="POST" action="http://localhost/api-code/api/articles/CreateArticles">
+                              <label for="title" class="sr-only">Title</label>
+                              <input type="text" class="form-control" id="article_title" placeholder="Title">
+                              <label for="description" class="sr-only">Description</label>
+                              <textarea id="article_body" class="form-control m-top-20" placeholder="Description"></textarea>
+                              <select id="category_select" class="form-control m-top-20" required>
+                              </select>
+                              <input type="submit" class="btn btn-primary m-top-20" value="Post article" />
+                           </form>
+                        </div>
+                        <!-- Create Article Panel Ends -->
+
+
+                        <!-- Edit Article Panel Starts -->
+                        <div id="edit_panel" class="block-card m-bot-40">
+                            <h3>Edit An Article</h3>
+                            <form id="edit_article" method="POST" action="http://localhost/api-code/api/articles/EditArticle">
+                               <label for="title" class="sr-only">Title</label>
+                               <input id="edit_article_title" type="text" class="form-control"  placeholder="Title">
+                               <label for="description" class="sr-only">Description</label>
+                               <textarea id="edit_article_body" class="form-control m-top-20" placeholder="Description"></textarea>
+                               <select id="edit_category_select" class="form-control m-top-20" required>
+                               </select>
+                               <input id="edit_user_id" type="hidden" name="edit_user_id">
+                               <input id="edit_article_id" type="hidden" name="edit_article_id">
+                               <input type="submit" class="btn btn-primary m-top-20" value="Edit article" />
+                            </form>
+                         </div>
+                         <!-- Edit Article Panel Ends -->
+
+
+
+                        <!-- Article Section starts -->
+                        <div id="article_section">
+                           <div class="article_holder block-card m-top-20">
+                              <h5 class="article_title">Title of todo</h5>
+                              <p>Much behind unjustifiably when winced along hatchet liberal and compositely insect affectionate wetted hey.</p>
+                           </div>
+                        </div>
+                        <!-- Article Section Ends -->
+
+                     </div>
+                  </div>
+                  <div class="col-3">
+                     <div  class="block-card">
+                        <h5>Categories</h5>
+                        <!-- Display Categories -->
+                        <ul id="category_block">
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- Container Ends -->
+         </div>
+          <!-- App Page Ends -->
+
+         <footer class="footer">
+            <div class="container">
+               <span class="text-muted">Rest API Development Tutorials | Frank John.</span>
+            </div>
+         </footer>
+
+      </div>
+       <!-- Wrapper Ends -->
+
+       
+      <!-- PRELOADER
+         ============================== -->
+      <div id="preloader">
+         <div id="status">&nbsp;</div>
+      </div>
+   </body>
+   
+   <script src="assets/js/jquery.min.js"></script>
+   <script src="assets/js/bootstrap.js"></script>
+   <script src="assets/js/bootstrap-notify.min.js"></script>
+   <script src="assets/customjs/preloader.js"></script>
+   <script src="assets/customjs/registration.js"></script>
+   <script src="assets/customjs/login.js"></script>
+   <script src="assets/customjs/categories.js"></script>
+   <script src="assets/customjs/articles.js"></script>
+   <script src="assets/customjs/scripts.js"></script>

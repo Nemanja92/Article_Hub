@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="#" />
+    <title>Auth Test</title>
+    <script src="assets/js/jquery.min.js"></script>  
+    <script src="assets/js/jquery.base64.min.js"></script>
+</head>
+<body>
+ 
+<script>
+    $(document).ready(function(){
+        get_auth_response()
+    });
+//function to create category dropdownlist
+function get_auth_response(){
+// var username = 'frankjohn';
+// var password = '123456789';
+$.ajax({
+    type: 'GET',
+    url: 'http://localhost/api-code/api/articles/GetArticle.php',
+    headers: {"Authorization":  'Basic ' + $.base64.encode( 'frankjohn:123456789' )},
+    contentType: 'application/json',
+    success: function(response){
+       console.log(response);
+    }
+});
+}        
+</script>
+
+
+</body>
+</html>
